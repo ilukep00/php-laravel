@@ -1,5 +1,6 @@
 <?php
 
+use App\Infrastructure\Controllers\GetUsersController;
 use App\Infrastructure\Controllers\GetUserController;
 use App\Infrastructure\Controllers\IsEarlyAdopterUserController;
 use App\Infrastructure\Controllers\GetStatusController;
@@ -19,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/status', GetStatusController::class);
 Route::get('/user/{userEmail}', GetUserController::class);
+Route::get('/users',GetUsersController::class);

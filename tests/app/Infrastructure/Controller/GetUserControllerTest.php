@@ -11,10 +11,9 @@ use Tests\TestCase;
 
 class GetUserControllerTest extends TestCase
 {
-
     private UserDataSource $userDataSource;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -48,12 +47,12 @@ class GetUserControllerTest extends TestCase
         $this->userDataSource
             ->expects("findByEmail")
             ->with('email@email.com')
-            ->andReturn(new User(1,'email@email.com'));
+            ->andReturn(new User(1, 'email@email.com'));
 
         $response = $this->get('/api/user/email@email.com');
 
         $response->assertOk();
         $response->assertExactJson(['id' => '1',
-            'email'=>'email@email.com']);
+            'email' => 'email@email.com']);
     }
 }
