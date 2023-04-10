@@ -34,5 +34,9 @@ class GetEarlyAdopterController extends BaseController
                 Response::HTTP_OK
             );
         }
+        return response()->json(
+            ['El usuario no es early adopter'],
+            Response::HTTP_OK
+        );
     }
 }
