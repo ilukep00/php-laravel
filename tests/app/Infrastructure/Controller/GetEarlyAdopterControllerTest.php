@@ -31,7 +31,7 @@ class GetEarlyAdopterControllerTest extends TestCase
             ->with('email@email.com')
             ->andReturnNull();
 
-        $response = $this->get("/api/earlyAdopter/email@email.com");
+        $response = $this->get("/api/early-adopter/email@email.com");
 
         $response->assertNotFound();
         $response->assertExactJson(['error' => 'usuario no encontrado']);
@@ -47,7 +47,7 @@ class GetEarlyAdopterControllerTest extends TestCase
             ->with('email@email.com')
             ->andReturn(new User(1001, 'email@email.com'));
 
-        $response = $this->get("/api/earlyAdopter/email@email.com");
+        $response = $this->get("/api/early-adopter/email@email.com");
 
         $response->assertOk();
         $response->assertExactJson(['El usuario es early adopter']);
@@ -63,7 +63,7 @@ class GetEarlyAdopterControllerTest extends TestCase
             ->with('email@email.com')
             ->andReturn(new User(2, 'email@email.com'));
 
-        $response = $this->get("/api/earlyAdopter/email@email.com");
+        $response = $this->get("/api/early-adopter/email@email.com");
 
         $response->assertOk();
         $response->assertExactJson(['El usuario no es early adopter']);
