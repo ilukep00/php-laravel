@@ -22,7 +22,6 @@ class GetUsersControllerTest extends TestCase
         });
     }
 
-
     /**
      * @test
      */
@@ -30,6 +29,7 @@ class GetUsersControllerTest extends TestCase
     {
         $this->userDataSource
             ->expects("getAll")
+            ->withNoArgs()
             ->andReturn([]);
 
         $response = $this->get("/api/users");
@@ -45,7 +45,11 @@ class GetUsersControllerTest extends TestCase
     {
         $this->userDataSource
             ->expects("getAll")
-            ->andReturn([new User(1, "email@email.com"), new User(2, "another_email@email.com")]);
+            ->withNoArgs()
+            ->andReturn([
+                new User(1, "email@email.com"),
+                new User(2, "another_email@email.com")
+            ]);
 
         $response = $this->get("/api/users");
 

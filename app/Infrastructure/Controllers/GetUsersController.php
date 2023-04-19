@@ -9,25 +9,21 @@ use Illuminate\Routing\Controller as BaseController;
 class GetUsersController extends BaseController
 {
     private UserDataSource $userDataSource;
+    private UserListResponseMapper $userListResponseMapper;
 
     /**
      * @param UserDataSource $userDataSource
+     * @param UserListResponseMapper $userListResponseMapper
      */
-    public function __construct(UserDataSource $userDataSource)
+    public function __construct(UserDataSource $userDataSource, UserListResponseMapper $userListResponseMapper)
     {
         $this->userDataSource = $userDataSource;
+        $this->userListResponseMapper = $userListResponseMapper;
     }
 
     public function __invoke(): JsonResponse
     {
         $users = $this->userDataSource->getAll();
-        if (empty($users)) {
-            return response()->json([]);
-        }
-        $jsonUsers = array();
-        foreach ($users as $user) {
-            $jsonUsers[] = array("id" => $user->getId(),"email" => $user->getEmail());
-        }
-        return response()->json($jsonUsers);
+        return response()->json($this->userListResponseMapper->map($users));
     }
 }

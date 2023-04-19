@@ -2,6 +2,7 @@
 
 namespace Tests\app\Infrastructure\Controller;
 
+use App\Application\isEarlyAdopterService;
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;
 use Tests\TestCase;
@@ -10,13 +11,15 @@ use Mockery;
 class GetEarlyAdopterControllerTest extends TestCase
 {
     private UserDataSource $userDataSource;
+    private isEarlyAdopterService $isEarlyAdopter;
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->userDataSource = Mockery::mock(UserDataSource::class);
-        $this->app->bind(UserDataSource::class, function () {
-            return $this->userDataSource;
+        $this->isEarlyAdopter = new isEarlyAdopterService($this->userDataSource);
+        $this->app->bind(isEarlyAdopterService::class, function () {
+            return  $this->isEarlyAdopter;
         });
     }
 
