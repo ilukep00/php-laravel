@@ -24,6 +24,6 @@ class IsEarlyAdopterService
             throw new UserNotFoundException();
         }
 
-        return $user->getId() < 1000;
+        return $user->getId() < 500;
     }
 }
